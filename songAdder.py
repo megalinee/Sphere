@@ -6,13 +6,13 @@ URL = input("Type in the YouTube URL")
 
 video = YouTube(URL)
 
-with open('./sphere/songchoice.json') as f:
+with open('./songchoice.json') as f:
     data = json.load(f)
 
 
 def generateRandNum():
     randNum = random.randint(0, 100000)
-    if not video.title.split()[0] + str(randNum) + ".mp4" in data:
+    if video.title.split()[0] + str(randNum) + ".mp4" not in data:
         return randNum
     else:
         return generateRandNum()
@@ -33,7 +33,7 @@ song = {title: video.title.split()
 
 data.update(song)
 
-with open('./sphere/songchoice.json', 'w') as f:
+with open('./songchoice.json', 'w') as f:
     json.dump(data, f, sort_keys=True)
 
 print("Song added!")
