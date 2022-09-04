@@ -1,0 +1,202 @@
+@import url('https://fonts.googleapis.com/css2?family=Teko&display=swap');
+
+head * { 
+  -webkit-font-smoothing: subpixel-antialiased !important; 
+  text-rendering:optimizeLegibility !important;
+}
+#Title {
+  color: whitesmoke;
+  font-family: 'Teko', serif;
+  font-size: 60px;
+  font-weight: 100;
+  text-decoration: underline rgb(42, 42, 42);
+  line-height: 0em;
+  padding-bottom: 0px;
+  padding-left: 5px;
+  padding-right: 20px;
+  float: left;
+  letter-spacing: 0px;
+}
+
+#Megaline {
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 20px;
+  padding-top: 13px;
+  float:left;
+  width: 220px;
+  height: auto;
+}
+
+#XX {
+  padding-bottom: 10px;
+  padding-left: 5px;
+  padding-right: 20px;
+  padding-top: 13px;
+  float:left;
+  width: 220px;
+  height: auto;
+}
+
+#Audio {
+  padding-top: 0px;
+}
+* {box-sizing: border-box;}
+.header {
+  overflow: hidden;
+  background-color: rgb(7, 7, 7);
+  padding: 2px 5px;
+}
+
+.footer {
+  position: fixed;
+  padding-left: 10px;
+  padding-right: 10px;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  background-color: rgb(7, 7, 7);
+  color: white;
+  text-align: center;
+}
+
+#gamesizer {
+  margin-left: 10px;
+  margin-top: 10px;
+}
+
+.footer-left {
+  width: 70%;
+  text-align: left;
+  float: left;
+}
+
+.footer-right {
+  width: 30%;
+  text-align: right;
+  float: right;
+}
+
+#social {
+  padding-left: 5px;
+  margin-top: 5px;
+  padding-right: 10px;
+  width: 60px;
+  height: auto;
+}
+
+
+.header-right a {
+  float: left;
+  color: rgb(255, 255, 255);
+  font-family: 'Teko', serif;
+  text-align: center;
+  padding: 12px;
+  padding-bottom: 2px;
+  padding-top: 6px;
+  text-decoration: none;
+  font-size: 35px; 
+  line-height: 25px;
+  border-radius: 4px;
+  margin: 3px;
+}
+
+.header-right a:hover {
+  background-color: rgb(42, 42, 42);
+  color: rgb(255, 255, 255);
+}
+
+.header-right a.active {
+  background-color: rgb(88, 88, 88);
+  color: white;
+}
+
+.header-right {
+  padding-top: 25px;
+  float: left;
+}
+
+#submissions {
+  float: left; 
+  font-size: 20px; 
+}
+
+#footerdiv {
+  display: inline-block;
+  margin: 20px;
+  margin-right: 80%;
+  padding-bottom: 20px;
+}
+
+@media screen and (max-width: 500px) {
+  #Title {
+    float: none;
+    padding-bottom: 0px;
+    display:block;
+  }
+
+  #Megaline {
+    float: none;
+    padding-bottom: 0px;
+    display:block;
+  }
+  
+  #submissions {
+    font-size: 15px;
+  }
+
+  .header a {
+    float: none;
+    display: block;
+    text-align: left;
+    margin: 5px;
+    line-height: 10px;
+    padding-bottom: 10px;
+    padding-top: 15px;
+  }
+  
+  .header-right {
+    padding-top: 0px;
+    float: none;
+  }
+  
+  #social {
+    padding-top: 12px;
+  }
+
+  #footerdiv {
+    margin: 30px;
+  }
+}
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+h2 {
+  font-family: "Andale Mono", "Courier New", monospace;
+  color: whitesmoke;
+  font-size: 50px;
+  font-weight: bold;
+}
+
+h3 {
+  font-family: "Andale Mono", "Courier New", monospace;
+  color: whitesmoke;
+  font-size: auto;
+  font-weight: 50;
+}
+
+#hyperlinkinvis {
+  color: rgb(88, 88, 88);
+}
+
+button { background:none;border:none; }

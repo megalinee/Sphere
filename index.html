@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>SPHERE</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="./assets/css/donotclick.css" type="text/css" />
+  <link rel="icon" type="image/x-icon" href="favicon.PNG" />
+  <style>
+    body {
+      margin: 0;
+    }
+
+    canvas {
+      display: block;
+      top: 0;
+      left: 0;
+    }
+  </style>
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/dat-gui/0.7.7/dat.gui.min.js"></script>
+</head>
+
+<body>
+  <div id="thing"">
+    <div id=" overlays" class="overlay">
+    <div id="logwrapper_r" class="logwrapper">
+      <div id="start" class="log">LOADING MUSIC...</div>
+    </div>
+
+    <div id="blOverlay" class="warning">[EPILEPSY WARNING]</div>
+
+  </div>
+  </div>
+  <div id="game">
+    <canvas id="bg"></canvas>
+  </div>
+  <script type="module" src="./visualizer.js"></script>
+</body>
+
+</html>
