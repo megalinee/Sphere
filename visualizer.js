@@ -11,6 +11,7 @@ import { EffectComposer } from 'https://cdn.skypack.dev/three@0.132.2/examples/j
 import { RenderPass } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/postprocessing/RenderPass.js';
 import { ShaderPass } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/postprocessing/ShaderPass.js';
 import { UnrealBloomPass } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/postprocessing/UnrealBloomPass.js';
+import { AfterimagePass } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/postprocessing/AfterimagePass.js';
 
 import { FXAAShader } from 'https://cdn.skypack.dev/three@0.132.2/examples/jsm/shaders/FXAAShader.js';
 
@@ -32,7 +33,7 @@ const gui = new DAT.GUI({
 
 let choices = {
     'Song': "Shuffle",
-    'Color': 0x1800cf
+    'Color': 0xff
 }
 
 async function getJSON(jsonName) {
@@ -117,7 +118,7 @@ camera.position.setX(10);
 let light = new THREE.DirectionalLight(0xffffff, 0);
 light.position.setScalar(100);
 scene.add(light);
-scene.add(new THREE.AmbientLight(0xffffff, .75));
+scene.add(new THREE.AmbientLight(0xffffff, 1));
 
 let renderScene = new RenderPass(scene, camera)
 
@@ -125,10 +126,12 @@ let effectFXAA = new ShaderPass(FXAAShader)
 effectFXAA.uniforms.resolution.value.set(1 / window.innerWidth, 1 / window.innerHeight)
 
 let bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85)
-bloomPass.threshold = 0
-bloomPass.strength = 3
-bloomPass.radius = .8
+bloomPass.threshold = .5
+bloomPass.strength = .5
+bloomPass.radius = .5
 bloomPass.renderToScreen = true
+
+const trailPass = new AfterimagePass();
 
 let composer = new EffectComposer(renderer)
 composer.setSize(window.innerWidth, window.innerHeight)
@@ -136,10 +139,9 @@ composer.setSize(window.innerWidth, window.innerHeight)
 composer.addPass(renderScene)
 composer.addPass(effectFXAA)
 composer.addPass(bloomPass)
+composer.addPass(trailPass)
 
-renderer.gammaInput = true
-renderer.gammaOutput = true
-renderer.toneMappingExposure = Math.pow(0.9, 4.0)
+renderer.toneMappingExposure = 1
 
 
 /*
@@ -239,6 +241,7 @@ let delta = 0;
 let interval = 1 / 60;
 
 let color = 0;
+let strength = 0;
 
 function animate() {
     requestAnimationFrame(animate);
@@ -271,13 +274,17 @@ function animate() {
         pivotPoint.rotation.z += (Math.random() + data) * .000025;
 
 
-        color = gradualChange((lowerFreqAvg / 255) * .25, color, .001)  // Generates color brightness
+        color = gradualChange((lowerFreqAvg / 255), color, .001)  // Generates color brightness
 
         renderer.setClearColor(choices.Color, color);
 
         if (!isMobile) {  // Disables bloom on mobile due to performance issues
-            bloomPass.strength = (higherFreqMin * .01)
+            trailPass.uniforms["damp"].value = data * .002;
+            strength = gradualChange(higherFreqMin * .005, strength, .1)
+            bloomPass.strength = strength
+
             camera.layers.set(1);
+
             composer.render();
 
             renderer.clearDepth();
