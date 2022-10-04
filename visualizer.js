@@ -126,9 +126,9 @@ let effectFXAA = new ShaderPass(FXAAShader)
 effectFXAA.uniforms.resolution.value.set(1 / window.innerWidth, 1 / window.innerHeight)
 
 let bloomPass = new UnrealBloomPass(new THREE.Vector2(window.innerWidth, window.innerHeight), 1.5, 0.4, 0.85)
-bloomPass.threshold = .5
+bloomPass.threshold = .25
 bloomPass.strength = .5
-bloomPass.radius = .5
+bloomPass.radius = .75
 bloomPass.renderToScreen = true
 
 const trailPass = new AfterimagePass();
@@ -140,6 +140,7 @@ composer.addPass(renderScene)
 composer.addPass(effectFXAA)
 composer.addPass(bloomPass)
 composer.addPass(trailPass)
+
 
 renderer.toneMappingExposure = 1
 
@@ -274,13 +275,13 @@ function animate() {
         pivotPoint.rotation.z += (Math.random() + data) * .000025;
 
 
-        color = gradualChange((lowerFreqAvg / 255), color, .001)  // Generates color brightness
+        color = gradualChange((lowerFreqAvg / 255), color, .002)  // Generates color brightness
 
         renderer.setClearColor(choices.Color, color);
 
         if (!isMobile) {  // Disables bloom on mobile due to performance issues
-            trailPass.uniforms["damp"].value = data * .002;
-            strength = gradualChange(higherFreqMin * .005, strength, .1)
+            trailPass.uniforms["damp"].value = data * .00225;
+            strength = gradualChange(higherFreqMin * .0045, strength, .05)
             bloomPass.strength = strength
 
             camera.layers.set(1);
